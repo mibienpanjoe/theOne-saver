@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TheOne Saver - Instagram Video Downloader</title>
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="background-animation"></div>
+
+    <main class="container">
+        <!-- Header -->
+        <header class="header">
+            <h1 class="logo">TheOne <span class="highlight">Saver</span></h1>
+            <p class="subtitle">Download Instagram Videos Instantly</p>
+        </header>
+
+        <!-- Input Section -->
+        <section id="input-section" class="card fade-in">
+            <form id="download-form">
+                <div class="input-group">
+                    <input type="url" id="video-url" placeholder="Paste Instagram Reel or Video URL here..." required autocomplete="off">
+                    <button type="submit" id="fetch-btn">
+                        <span class="btn-text">Get Video</span>
+                        <div class="spinner hidden" id="loading-spinner"></div>
+                    </button>
+                </div>
+                <div id="error-message" class="error-text hidden"></div>
+            </form>
+        </section>
+
+        <!-- Preview Section (Hidden Initially) -->
+        <section id="preview-section" class="card hidden">
+            <h2 class="section-title">Video Ready!</h2>
+            <div class="preview-container">
+                <div class="thumbnail-wrapper">
+                    <img id="video-thumbnail" src="" alt="Video Thumbnail">
+                    <div class="play-icon">
+                        <svg viewBox="0 0 24 24" width="48" height="48" fill="white">
+                            <path d="M8 5v14l11-7z" />
+                        </svg>
+                    </div>
+                </div>
+                <div class="video-info">
+                    <h3 id="video-title">Video Title</h3>
+                </div>
+            </div>
+            
+            <div class="actions">
+                <button id="download-btn" class="btn primary">
+                    <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+                        <path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z" />
+                    </svg>
+                    Download Video
+                </button>
+                <button id="reset-btn" class="btn secondary">
+                    <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+                        <path d="M17.65 6.35A7.958 7.958 0 0012 4c-4.42 0-7.99 3.58-7.99 8s3.57 8 7.99 8c3.73 0 6.84-2.55 7.73-6h-2.08A5.99 5.99 0 0112 18c-3.31 0-6-2.69-6-6s2.69-6 6-6c1.66 0 3.14.69 4.22 1.78L13 11h7V4l-2.35 2.35z" />
+                    </svg>
+                    Download Another
+                </button>
+            </div>
+        </section>
+    </main>
+
+    <script src="app.js"></script>
+</body>
+</html>
