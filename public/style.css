@@ -214,10 +214,10 @@ button {
 .thumbnail-wrapper {
     position: relative;
     width: 100%;
-    max-width: 400px;
-    border-radius: 1rem;
+    max-width: 160px; /* Greatly reduced size */
+    border-radius: 0.75rem;
     overflow: hidden;
-    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 10px 20px -5px rgba(0, 0, 0, 0.4);
     background: #000;
     aspect-ratio: 9/16;
 }
@@ -255,26 +255,9 @@ button {
     background: rgba(99, 102, 241, 0.8);
 }
 
-.video-info {
-    text-align: center;
-    width: 100%;
-}
-
-#video-title {
-    font-size: 1.1rem;
-    font-weight: 500;
-    color: var(--text-main);
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    line-clamp: 2;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
-
 .actions {
     display: flex;
-    gap: 1rem;
+    gap: 0.75rem;
     justify-content: center;
 }
 
@@ -341,9 +324,69 @@ button {
     
     .actions {
         flex-direction: column;
+        width: 100%;
+    }
+    
+    .actions .btn {
+        width: 100%;
     }
     
     .card {
         padding: 1.5rem;
+    }
+}
+
+/* Specific styling for when preview is only thumbnail */
+.preview-only-thumbnail {
+    display: flex !important;
+    gap: 2rem;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.preview-only-thumbnail.hidden {
+    display: none !important;
+}
+
+.preview-only-thumbnail .preview-container {
+    margin-bottom: 0;
+}
+
+.preview-only-thumbnail .actions {
+    flex-direction: column;
+    width: 200px;
+    gap: 0.75rem;
+}
+
+.preview-only-thumbnail .btn {
+    padding: 0.85rem 1rem;
+    font-size: 0.95rem;
+}
+
+/* Mobile specific restructuring for the preview */
+@media (max-width: 480px) {
+    .preview-only-thumbnail {
+        flex-direction: column;
+        gap: 1.5rem;
+        padding: 1.5rem;
+    }
+    
+    .preview-only-thumbnail .actions {
+        width: 100%;
+    }
+    
+    .thumbnail-wrapper {
+        max-width: 140px; /* Slightly smaller for mobile */
+    }
+    
+    .play-icon {
+        width: 48px;
+        height: 48px;
+    }
+    
+    .play-icon svg {
+        width: 32px;
+        height: 32px;
     }
 }

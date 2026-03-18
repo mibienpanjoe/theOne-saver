@@ -9,6 +9,12 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
+    <!-- PWA -->
+    <link rel="manifest" href="/manifest.json">
+    <meta name="theme-color" content="#6366f1">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <link rel="apple-touch-icon" href="/icons/icon-192.png">
 </head>
 <body>
     <div class="background-animation"></div>
@@ -43,19 +49,15 @@
         </section>
 
         <!-- Preview Section (Hidden Initially) -->
-        <section id="preview-section" class="card hidden">
-            <h2 class="section-title">Video Ready!</h2>
+        <section id="preview-section" class="card hidden preview-only-thumbnail">
             <div class="preview-container">
                 <div class="thumbnail-wrapper">
-                    <img id="video-thumbnail" src="" alt="Video Thumbnail">
+                    <img id="video-thumbnail" src="" alt="Video Thumbnail" referrerpolicy="no-referrer">
                     <div class="play-icon">
                         <svg viewBox="0 0 24 24" width="48" height="48" fill="white">
                             <path d="M8 5v14l11-7z" />
                         </svg>
                     </div>
-                </div>
-                <div class="video-info">
-                    <h3 id="video-title">Video Title</h3>
                 </div>
             </div>
             

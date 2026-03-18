@@ -11,7 +11,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const previewSection = document.getElementById('preview-section');
     
     const videoThumbnail = document.getElementById('video-thumbnail');
-    const videoTitle = document.getElementById('video-title');
     const downloadBtn = document.getElementById('download-btn');
     const resetBtn = document.getElementById('reset-btn');
 
@@ -62,8 +61,19 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             // Update UI with video details
-            videoThumbnail.src = data.thumbnail || 'https://via.placeholder.com/400x700?text=No+Thumbnail';
-            videoTitle.textContent = data.title;
+            
+            // Set up error handler before setting src
+            videoThumbnail.onerror = () => {
+                console.error('Thumbnail failed to load, using placeholder');
+                videoThumbnail.onerror = null; // prevent infinite loop
+                videoThumbnail.src = 'data:image/svg+xml,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="160" height="284" fill="%23334155"><rect width="160" height="284" rx="12"/><text x="80" y="142" text-anchor="middle" fill="%2394a3b8" font-size="14" font-family="sans-serif">No Preview</text></svg>');
+            };
+            
+            if (data.thumbnail) {
+                videoThumbnail.src = `/api/proxy-image?url=${encodeURIComponent(data.thumbnail)}`;
+            } else {
+                videoThumbnail.src = 'data:image/svg+xml,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="160" height="284" fill="%23334155"><rect width="160" height="284" rx="12"/><text x="80" y="142" text-anchor="middle" fill="%2394a3b8" font-size="14" font-family="sans-serif">No Preview</text></svg>');
+            }
             currentVideoUrl = data.video_url;
 
             // Transition from Input to Preview
@@ -86,16 +96,8 @@ document.addEventListener('DOMContentLoaded', () => {
     downloadBtn.addEventListener('click', () => {
         if (!currentVideoUrl) return;
 
-        // Create a temporary anchor element to trigger download
-        // Due to CORS on the actual video URL and browser security, 
-        // we might just open it in a new tab if it's a cross-origin link without CORS headers.
-        const a = document.createElement('a');
-        a.href = currentVideoUrl;
-        a.target = '_blank';
-        a.download = 'instagram_video.mp4';
-        document.body.appendChild(a);
-        a.click();
-        document.body.removeChild(a);
+        // Route through our server proxy to force a proper file download
+        window.location.href = `/api/download?url=${encodeURIComponent(currentVideoUrl)}`;
     });
 
     resetBtn.addEventListener('click', () => {
@@ -112,4 +114,9 @@ document.addEventListener('DOMContentLoaded', () => {
         // Focus input
         setTimeout(() => urlInput.focus(), 100);
     });
+
+    // Register PWA service worker
+    if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('/sw.js');
+    }
 });
