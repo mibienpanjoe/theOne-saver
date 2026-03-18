@@ -1,6 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
     const form = document.getElementById('download-form');
     const urlInput = document.getElementById('video-url');
+    const pasteBtn = document.getElementById('paste-btn');
     const fetchBtn = document.getElementById('fetch-btn');
     const loadingSpinner = document.getElementById('loading-spinner');
     const btnText = document.querySelector('.btn-text');
@@ -15,6 +16,20 @@ document.addEventListener('DOMContentLoaded', () => {
     const resetBtn = document.getElementById('reset-btn');
 
     let currentVideoUrl = null;
+
+    if (pasteBtn) {
+        pasteBtn.addEventListener('click', async () => {
+            try {
+                const text = await navigator.clipboard.readText();
+                if (text) {
+                    urlInput.value = text;
+                    urlInput.focus();
+                }
+            } catch (err) {
+                console.error('Failed to read clipboard contents: ', err);
+            }
+        });
+    }
 
     form.addEventListener('submit', async (e) => {
         e.preventDefault();

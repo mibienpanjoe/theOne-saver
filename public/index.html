@@ -24,7 +24,15 @@
         <section id="input-section" class="card fade-in">
             <form id="download-form">
                 <div class="input-group">
-                    <input type="url" id="video-url" placeholder="Paste Instagram Reel or Video URL here..." required autocomplete="off">
+                    <div class="input-wrapper">
+                        <input type="url" id="video-url" placeholder="Paste Instagram Reel or Video URL here..." required autocomplete="off">
+                        <button type="button" id="paste-btn" class="icon-btn" aria-label="Paste from clipboard" title="Paste">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                            </svg>
+                        </button>
+                    </div>
                     <button type="submit" id="fetch-btn">
                         <span class="btn-text">Get Video</span>
                         <div class="spinner hidden" id="loading-spinner"></div>
